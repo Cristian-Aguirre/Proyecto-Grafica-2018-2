@@ -3,7 +3,7 @@
 #include <FreeImage.h>
 #include <math.h>
 
-#define DIM 50
+#define DIM 15
 #define PI 3.141592
 
 #define numTEXT 8
@@ -216,82 +216,6 @@ void piso()
    glEnd();
 }
 
-void tree(){
-    //float tallo
-	glEnable(GL_TEXTURE_2D);
-    glPushMatrix();
-    glTranslatef(3.0, 0.0, 3.0);
-    //glScalef();
-   // glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_QUADS);
-	// top
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
- 
-	glEnd();
- 
-	glBegin(GL_QUADS);
-	// front
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
- 
-	glEnd();
- 
-	glBegin(GL_QUADS);
-	// right
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glNormal3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, 0.5f, 0.5f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
- 
-	glEnd();
- 
-	glBegin(GL_QUADS);
-	// left
-	glColor3f(0.0f, 0.0f, 0.5f);
-	glNormal3f(-1.0f, 0.0f, 0.0f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, 0.5f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
- 
-	glEnd();
- 
-	glBegin(GL_QUADS);
-	// bottom
-	glColor3f(0.5f, 0.0f, 0.0f);
-	glNormal3f(0.0f, -1.0f, 0.0f);
-	glVertex3f(0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, 0.5f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
- 
-	glEnd();
- 
-	glBegin(GL_QUADS);
-	// back
-	glColor3f(0.0f, 0.5f, 0.0f);
-	glNormal3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(0.5f, 0.5f, -0.5f);
-	glVertex3f(0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, -0.5f, -0.5f);
-	glVertex3f(-0.5f, 0.5f, -0.5f);
- 
-	glEnd();
-	
-    glPopMatrix();
-    
-}
 
 void cuerpo()
 {
@@ -491,11 +415,9 @@ void display()
     glEnable(GL_TEXTURE_2D);
     camara();
     piso();
-    //tree();
     cielo();
     cuerpo();
     bloque();
-    tree();
    
      glPushMatrix();
     if(flag[0]!=1){
