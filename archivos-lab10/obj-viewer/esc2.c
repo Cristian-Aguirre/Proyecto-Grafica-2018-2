@@ -9,7 +9,7 @@
 #define numTEXT 16
 
 int texID[numTEXT];
-char* textureFileNames[numTEXT] = {"asfalto.jpeg","sky.jpg","stucco_white.jpg","pacman1.jpg","ppp.jpeg","gold.jpg","portal.jpeg","lava.png","plomo.png","edi.jpeg","edi1.jpeg",
+char* textureFileNames[numTEXT] = {"asfalto.jpeg","sky.jpg","stucco_white.jpg","ddd.jpg","ppp.jpeg","gold.jpg","portal.jpeg","lava.png","plomo.png","edi.jpeg","edi1.jpeg",
 "edi2.jpeg", "edi3.jpeg", "edi4.jpeg","cielo.jpg","origen.jpeg"};
 
 float pos[3];
@@ -50,12 +50,12 @@ void teclado1(unsigned char key, int x,int y)
 	switch(key)
 	{
 		case '1':    //camara avanza
-			pos[0]-=dir[0]*10;
-			pos[2]-=dir[2]*10;
+			pos[0]-=dir[0]*5;
+			pos[2]-=dir[2]*5;
 			break; 
 		case '2':    //camara retrocede
-			pos[0]+=dir[0]*10;
-			pos[2]+=dir[2]*10;
+			pos[0]+=dir[0]*5;
+			pos[2]+=dir[2]*5;
 			break;
 		case 'd':    
 		case 'D':{	
@@ -93,17 +93,17 @@ void teclado2(int key, int x,int y)  // teclas para rotar la camara
 	{
 		case GLUT_KEY_UP:
 			if(angV>-90)
-			2*angV--;
+			angV--;
 			break; 
 		case GLUT_KEY_DOWN:
 			if(angV<90)
-			2*angV++;
+			angV++;
 			break; 
 		case GLUT_KEY_LEFT:
-			2*angH--;
+			angH--;
 			break; 
 		case GLUT_KEY_RIGHT:
-			2*angH++;
+			angH++;
 			break; 
 		
 		default:
@@ -351,27 +351,24 @@ void bloque(){
 	
 }
 void key(){
-	float lado = DIM/5;
-   float dx,dy;
-   GLUquadric *quadratic;
-
-   glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, texID[3]);
-   glTranslatef(0.0, 1.5, 0.0);
- 
-
-   quadratic = gluNewQuadric();
-   gluQuadricNormals(quadratic, GLU_SMOOTH);
-   gluQuadricTexture(quadratic, GL_TRUE);
-   glPushMatrix();
-   glRotatef(roty,1.0,0.0,1.0);
-   gluSphere(quadratic,radio,40,40);
-   glPopMatrix();
-	roty += 3.0;
-	//glRotatef(roty,1.0,0.0,1.0);	
-   	
+	glEnable(GL_TEXTURE_2D);
+  	glBindTexture(GL_TEXTURE_2D, texID[5] );
+	glPushMatrix();
+	glRotatef(roty,1.0,0.0,1.0);	
+   	glutSolidTorus(0.5,1.0,20,20);
+	glPopMatrix();
+	roty=roty+0.7;
 }
+void nkey(){
+	glEnable(GL_TEXTURE_2D);
+  	glBindTexture(GL_TEXTURE_2D, texID[7] );
+	glPushMatrix();
+	glRotatef(roty,1.0,0.0,1.0);	
+   	glutSolidTorus(0.5,1.0,20,20);
+	glPopMatrix();
+	roty=roty+0.7;
 
+}
 void portal(){
 float lado = DIM/8;
 		
@@ -1552,8 +1549,8 @@ void display()
     piso();
     cielo();
     cielotecho();
-    //cuerpo();
-    //bloque();
+    cuerpo();
+    bloque();
     edificio();
     edificio1();
     edificio2();
@@ -1574,34 +1571,34 @@ void display()
     edificy3();
     edificy4();
      glPushMatrix();
-    //if(flag[0]!=1){
+    if(flag[0]!=1){
     glTranslatef(-5,0.0,10);
     key();
     	if((posx>=-5-0.3&&posx<=-5+0.3)&&posy==0.0&&(posz>=10-0.3&&posz<=10+0.3)){
 		flag[0]=1;
 		point=point+10;
 			b++;}
-    //}
+    }
 	 glPopMatrix();
 	 glPushMatrix();
-    //if(flag[1]!=1){
+    if(flag[1]!=1){
     glTranslatef(10,0.0,-10);
     key();
     	if((posx>=10 -0.3&&posx<=10+0.3)&&posy==0.0&&(posz>=-10-0.3&&posz<=-10+0.3)){
 		flag[1]=1;
 		point=point+10;
 		b++;}
-    //}
+    }
 	 glPopMatrix();
 	 glPushMatrix();
-    //if(flag[2]!=1){
+    if(flag[2]!=1){
     glTranslatef(-10,0.0,10);
     key();
     	if((posx>=-10-0.3&&posx<=-10+0.3)&&posy==0.0&&(posz>=10-0.3&&posz<=10+0.3)){
 		flag[2]=1;
 		point=point+10;
 			b++;}
-    //}
+    }
 
     	 glPopMatrix();
 	 glPushMatrix();
@@ -1628,7 +1625,7 @@ void display()
  glPushMatrix();
       if(nflag[0]!=1){
     glTranslatef(5,0.0,7);
-   
+   nkey();
     	if((posx>=5-0.3&&posx<=5+0.3)&&posy==0.0&&(posz>=7-0.3&&posz<=7+0.3)){
 		nflag[0]=1;
 		npoint++;}
@@ -1637,7 +1634,7 @@ void display()
  glPushMatrix();
  if(nflag[1]!=1){
     glTranslatef(-8,0.0,8);
-    
+    nkey();
     	if((posx>=-8-0.3&&posx<=-8+0.3)&&posy==0.0&&(posz>=8-0.3&&posz<=8+0.3)){
 		nflag[1]=1;
 		npoint++;}
@@ -1646,7 +1643,7 @@ void display()
  glPushMatrix();
  if(nflag[2]!=1){
     glTranslatef(8,0.0,-8);
-    
+    nkey();
     	if((posx>=8-0.3&&posx<=8+0.3)&&posy==0.0&&(posz>=-8-0.3&&posz<=-8+0.3)){
 		nflag[2]=1;
 		npoint++;}
@@ -1655,7 +1652,7 @@ void display()
     glPopMatrix();
 
  
-   //portal();
+   portal();
 	if(b==5&&(posx>=-25-0.5&&posx<=-25+0.5)&&posy==0.0&&(posz>=10.5-0.5&&posz<=10.5+0.5)){
 	printf(" you won total points, %d \n  lifes: %d",point-5*npoint,life-npoint);
 	exit(0);	

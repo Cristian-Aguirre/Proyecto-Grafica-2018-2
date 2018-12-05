@@ -1,0 +1,2 @@
+
+g++ obj-viewer.cpp ../common/shader_utils.cpp -lglut -lGLEW -lGL -lm -I./glm -I ./../common -o obj-viewer

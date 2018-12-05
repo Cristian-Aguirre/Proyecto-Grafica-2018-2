@@ -2,14 +2,16 @@
 #include <stdio.h>
 #include <FreeImage.h>
 #include <math.h>
+#include <obj.c>
 
 #define DIM 15
 #define PI 3.141592
 
-#define numTEXT 10
+#define numTEXT 12
 
 int texID[numTEXT];
-char* textureFileNames[numTEXT] = {"barro.jpeg","mont1.jpeg","stucco_white.jpg","grass.jpg","ppp.jpeg","gold.jpg","vortex.png","lava.png","sky.jpg","monte.jpeg"};
+char* textureFileNames[numTEXT] = {"barro.jpeg","paisaje1.jpeg","stucco_white.jpg","grass.jpg","clava1.jpeg","gold.jpg","vortex.png","lava.png","sky.jpg","monte.jpeg",
+"cielo.jpg","anochecer.jpeg"};
 
 float pos[3];
 float at[3];
@@ -26,6 +28,7 @@ int point=0,b=0;
 int npoint=0;
 float posx=0.0,posy=0.0,posz=0.0;
 float x=-5.0,y=0.0,z=2.5;
+obj * primer;
 void camara()
 {
 	mod = sqrt(dir[0]*dir[0] + dir[2]*dir[2]);
@@ -49,12 +52,12 @@ void teclado1(unsigned char key, int x,int y)
 	switch(key)
 	{
 		case '1':    //camara avanza
-			pos[0]-=dir[0]*10;
-			pos[2]-=dir[2]*10;
+			pos[0]-=dir[0]*15;
+			pos[2]-=dir[2]*15;
 			break; 
 		case '2':    //camara retrocede
-			pos[0]+=dir[0]*10;
-			pos[2]+=dir[2]*10;
+			pos[0]+=dir[0]*15;
+			pos[2]+=dir[2]*15;
 			break;
 		case 'd':    
 		case 'D':{	
@@ -92,17 +95,17 @@ void teclado2(int key, int x,int y)  // teclas para rotar la camara
 	{
 		case GLUT_KEY_UP:
 			if(angV>-90)
-			1.5*angV--;
+			4*angV--;
 			break; 
 		case GLUT_KEY_DOWN:
 			if(angV<90)
-			1.5*angV++;
+			4*angV++;
 			break; 
 		case GLUT_KEY_LEFT:
-			1.5*angH--;
+			4*angH--;
 			break; 
 		case GLUT_KEY_RIGHT:
-			1.5*angH++;
+			4*angH++;
 			break; 
 		
 		default:
@@ -157,16 +160,16 @@ void cielotecho()
    float dim = DIM;	
    int num = 4;
    glEnable(GL_TEXTURE_2D);
-   glBindTexture(GL_TEXTURE_2D, texID[8] );
+   glBindTexture(GL_TEXTURE_2D, texID[11] );
    glBegin(GL_QUADS);
       glTexCoord2f(0,0);
-      glVertex3f(-4*dim,3.8*dim,2*dim);
+      glVertex3f(-2*dim,3.8*dim,2*dim);
       glTexCoord2f(0.5,0);
-      glVertex3f(4*dim,3.8*dim,2*dim);
+      glVertex3f(2*dim,3.8*dim,2*dim);
       glTexCoord2f(0.5,1);
-      glVertex3f(4*dim,3.8*dim,-2*dim);
+      glVertex3f(2*dim,3.8*dim,-2*dim);
       glTexCoord2f(0,1);
-      glVertex3f(-4*dim,3.8*dim,-2*dim);
+      glVertex3f(-2*dim,3.8*dim,-2*dim);
    glEnd();
 }
 
@@ -178,47 +181,47 @@ void cielo()
    glBindTexture(GL_TEXTURE_2D, texID[1] );
     glBegin(GL_QUADS);
 	glTexCoord2f(0,0);
-	glVertex3f(-4*lado,0,2*lado);
+	glVertex3f(-2*lado,0,2*lado);
 	glTexCoord2f(0.5,0);
-	glVertex3f(-3*lado,0,-2*lado);
+	glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(0.5,1);
-      glVertex3f(-3*lado,4*lado,-2*lado);
+      glVertex3f(-2*lado,4*lado,-2*lado);
       glTexCoord2f(0,1);
-      glVertex3f(-3*lado,4*lado,2*lado);
+      glVertex3f(-2*lado,4*lado,2*lado);
 
       glTexCoord2f(0.5,0);
-      glVertex3f(-3*lado,0,-2*lado);
+      glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(1,0);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,4*lado,-2*lado);
+      glVertex3f(2*lado,4*lado,-2*lado);
       glTexCoord2f(0.5,1);
-      glVertex3f(-3*lado,4*lado,-2*lado);
+      glVertex3f(-2*lado,4*lado,-2*lado);
 
       glTexCoord2f(1,0);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(0.5,0);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0.5,1);
-      glVertex3f(3*lado,4*lado,2*lado);
+      glVertex3f(2*lado,4*lado,2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,4*lado,-2*lado);
+      glVertex3f(2*lado,4*lado,-2*lado);
 
       glTexCoord2f(0.5,0);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0,0);
-      glVertex3f(-3*lado,0,2*lado);
+      glVertex3f(-2*lado,0,2*lado);
       glTexCoord2f(0,1);
-      glVertex3f(-3*lado,4*lado,2*lado);
+      glVertex3f(-2*lado,4*lado,2*lado);
       glTexCoord2f(0.5,1);
-      glVertex3f(3*lado,4*lado,2*lado);
+      glVertex3f(2*lado,4*lado,2*lado);
 
       glEnd();
    }
 
 void piso()
 {	
-   float dim = 2*DIM;	
+   float dim = DIM;	
    int num = 4;
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texID[0] );
@@ -255,6 +258,7 @@ void cuerpo()
    glPopMatrix();
 
 
+
 }
 void ControlRaton( int button, int state, int x, int y)
 {
@@ -275,35 +279,35 @@ void monte(){
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texID[9] );
    glPushMatrix();
-   glTranslatef(-25.0, -3.0, -5.0);
+   glTranslatef(-10.0, -3.0, -5.0);
    glBegin(GL_TRIANGLES);
    glTexCoord2f(0,0);
-	glVertex3f(-3*lado,0,2*lado);
+	glVertex3f(-2*lado,0,2*lado);
 	glTexCoord2f(1,0);
-	glVertex3f(-3*lado,0,-2*lado);
+	glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,6*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(0,0);
-      glVertex3f(-3*lado,0,2*lado);
+      glVertex3f(-2*lado,0,2*lado);
       glTexCoord2f(0,1);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,6*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(1,0);
-      glVertex3f(-3*lado,0,-2*lado);
+      glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,6*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(0,1);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,6*lado,0);
+      glVertex3f(0,4*lado,0);
    glEnd();
    glPopMatrix();
    glutPostRedisplay();
@@ -315,35 +319,155 @@ void monte1(){
    glEnable(GL_TEXTURE_2D);
    glBindTexture(GL_TEXTURE_2D, texID[9] );
    glPushMatrix();
-   glTranslatef(-20.0, -3.0, 30.0);
+   glTranslatef(20.0, -3.0, 18.0);
    glBegin(GL_TRIANGLES);
    glTexCoord2f(0,0);
-	glVertex3f(-3*lado,0,2*lado);
+	glVertex3f(-2*lado,0,2*lado);
 	glTexCoord2f(1,0);
-	glVertex3f(-3*lado,0,-2*lado);
+	glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,8*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(0,0);
-      glVertex3f(-3*lado,0,2*lado);
+      glVertex3f(-2*lado,0,2*lado);
       glTexCoord2f(0,1);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,8*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(1,0);
-      glVertex3f(-3*lado,0,-2*lado);
+      glVertex3f(-2*lado,0,-2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,8*lado,0);
+      glVertex3f(0,4*lado,0);
 
    glTexCoord2f(0,1);
-      glVertex3f(3*lado,0,-2*lado);
+      glVertex3f(2*lado,0,-2*lado);
       glTexCoord2f(1,1);
-      glVertex3f(3*lado,0,2*lado);
+      glVertex3f(2*lado,0,2*lado);
       glTexCoord2f(0.5,0.5);
-      glVertex3f(0,8*lado,0);
+      glVertex3f(0,4*lado,0);
+   glEnd();
+   glPopMatrix();
+   glutPostRedisplay();
+}
+
+void monte2(){
+   float lado = DIM/4;
+   int num = 4;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texID[9] );
+   glPushMatrix();
+   glTranslatef(20.0, -3.0, -18.0);
+   glBegin(GL_TRIANGLES);
+   glTexCoord2f(0,0);
+	glVertex3f(-2*lado,0,2*lado);
+	glTexCoord2f(1,0);
+	glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,0);
+      glVertex3f(-2*lado,0,2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(1,0);
+      glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+   glEnd();
+   glPopMatrix();
+   glutPostRedisplay();
+}
+
+void monte3(){
+   float lado = DIM/4;
+   int num = 4;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texID[9] );
+   glPushMatrix();
+   glTranslatef(-20.0, -3.0, -18.0);
+   glBegin(GL_TRIANGLES);
+   glTexCoord2f(0,0);
+	glVertex3f(-2*lado,0,2*lado);
+	glTexCoord2f(1,0);
+	glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,0);
+      glVertex3f(-2*lado,0,2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(1,0);
+      glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+   glEnd();
+   glPopMatrix();
+   glutPostRedisplay();
+}
+
+void monte4(){
+   float lado = DIM/4;
+   int num = 4;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texID[9] );
+   glPushMatrix();
+   glTranslatef(-20.0, -3.0, 18.0);
+   glBegin(GL_TRIANGLES);
+   glTexCoord2f(0,0);
+	glVertex3f(-2*lado,0,2*lado);
+	glTexCoord2f(1,0);
+	glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,0);
+      glVertex3f(-2*lado,0,2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(1,0);
+      glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
+
+   glTexCoord2f(0,1);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,0.5);
+      glVertex3f(0,4*lado,0);
    glEnd();
    glPopMatrix();
    glutPostRedisplay();
@@ -429,24 +553,25 @@ void bloque(){
 	
 }
 void key(){
-	glEnable(GL_TEXTURE_2D);
-  	glBindTexture(GL_TEXTURE_2D, texID[5] );
-	glPushMatrix();
-	glRotatef(roty,1.0,0.0,1.0);	
-   	glutSolidTorus(0.5,1.0,20,20);
-	glPopMatrix();
-	roty=roty+0.7;
-}
-void nkey(){
-	glEnable(GL_TEXTURE_2D);
-  	glBindTexture(GL_TEXTURE_2D, texID[7] );
-	glPushMatrix();
-	glRotatef(roty,1.0,0.0,1.0);	
-   	glutSolidTorus(0.5,1.0,20,20);
-	glPopMatrix();
-	roty=roty+0.7;
+	float lado = DIM/5;
+   float dx,dy;
+   GLUquadric *quadratic;
 
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texID[3]);
+   glTranslatef(0.0, 1.5, 0.0);
+ 
+
+   quadratic = gluNewQuadric();
+   gluQuadricNormals(quadratic, GLU_SMOOTH);
+   gluQuadricTexture(quadratic, GL_TRUE);
+   glPushMatrix();
+   glRotatef(roty,1.0,0.0,1.0);
+   gluSphere(quadratic,radio,40,40);
+   glPopMatrix();
+	roty += 2.0;
 }
+
 void portal(){
 float lado = DIM/8;
 		
@@ -505,6 +630,66 @@ float lado = DIM/8;
       glPopMatrix();
 	
 }
+
+void anden(){
+float lado = DIM/8;
+		
+   int num = 4;
+   glEnable(GL_TEXTURE_2D);
+   glBindTexture(GL_TEXTURE_2D, texID[3] );
+	glPushMatrix();
+	glTranslatef(0.0,0.5,10.5);
+	glRotatef(90,0.0,0.0,1.0);    	
+	glBegin(GL_QUADS);
+	glTexCoord2f(0,0);
+	glVertex3f(-2*lado,0,2*lado);
+	glTexCoord2f(0.5,0);
+	glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(0.5,1);
+      glVertex3f(-2*lado,lado,-2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(-2*lado,lado,2*lado);
+
+      glTexCoord2f(0.5,0);
+      glVertex3f(-2*lado,0,-2*lado);
+      glTexCoord2f(1,0);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,lado,-2*lado);
+      glTexCoord2f(0.5,1);
+      glVertex3f(-2*lado,lado,-2*lado);
+
+      glTexCoord2f(1,0);
+      glVertex3f(2*lado,0,-2*lado);
+      glTexCoord2f(0.5,0);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0.5,1);
+      glVertex3f(2*lado,lado,2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,lado,-2*lado);
+
+      glTexCoord2f(0.5,0);
+      glVertex3f(2*lado,0,2*lado);
+      glTexCoord2f(0,0);
+      glVertex3f(-2*lado,0,2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(-2*lado,lado,2*lado);
+      glTexCoord2f(0.5,1);
+      glVertex3f(2*lado,lado,2*lado);
+	
+	glTexCoord2f(0,0);
+      glVertex3f(-2*lado,lado,2*lado);
+      glTexCoord2f(1,0);
+      glVertex3f(2*lado,lado,2*lado);
+      glTexCoord2f(1,1);
+      glVertex3f(2*lado,lado,-2*lado);
+      glTexCoord2f(0,1);
+      glVertex3f(-2*lado,lado,-2*lado);
+      glEnd();
+      glPopMatrix();
+	
+}
+
 void display() 
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  
@@ -517,11 +702,16 @@ void display()
     bloque();
     cielotecho();
     monte();
-    monte1();   
+    monte1();
+    monte2();
+    monte3();
+    monte4();  
+    //anden(); 
      glPushMatrix();
+	obj_render(primer);
     if(flag[0]!=1){
     glTranslatef(-5,0.0,10);
-    //key();
+    key();
     	if((posx>=-5-0.3&&posx<=-5+0.3)&&posy==0.0&&(posz>=10-0.3&&posz<=10+0.3)){
 		flag[0]=1;
 		point=point+10;
@@ -531,7 +721,7 @@ void display()
 	 glPushMatrix();
     if(flag[1]!=1){
     glTranslatef(10,0.0,-10);
-    //key();
+    key();
     	if((posx>=10 -0.3&&posx<=10+0.3)&&posy==0.0&&(posz>=-10-0.3&&posz<=-10+0.3)){
 		flag[1]=1;
 		point=point+10;
@@ -541,7 +731,7 @@ void display()
 	 glPushMatrix();
     if(flag[2]!=1){
     glTranslatef(-10,0.0,10);
-    //key();
+    key();
     	if((posx>=-10-0.3&&posx<=-10+0.3)&&posy==0.0&&(posz>=10-0.3&&posz<=10+0.3)){
 		flag[2]=1;
 		point=point+10;
@@ -552,7 +742,7 @@ void display()
 	 glPushMatrix();
     if(flag[3]!=1){
     glTranslatef(5,0.0,5);
-    //key();
+    key();
     	if((posx>=5-0.3&&posx<=5+0.3)&&posy==0.0&&(posz>=5-0.3&&posz<=5+0.3)){
 		flag[3]=1;
 		point=point+10;
@@ -563,7 +753,7 @@ void display()
   
    if(flag[4]!=1){
     	glTranslatef(-5,0.0,3);
-    	//key();
+    	key();
     	if((posx>=-5-0.5&&posx<=-5+0.5)&&posy==0.0&&(posz>=3-0.5&&posz<=3+0.5)){
 		flag[4]=1;
 		point+=10;
@@ -573,7 +763,7 @@ void display()
  glPushMatrix();
       if(nflag[0]!=1){
     glTranslatef(5,0.0,7);
-   //nkey();
+ 
     	if((posx>=5-0.3&&posx<=5+0.3)&&posy==0.0&&(posz>=7-0.3&&posz<=7+0.3)){
 		nflag[0]=1;
 		npoint++;}
@@ -582,7 +772,7 @@ void display()
  glPushMatrix();
  if(nflag[1]!=1){
     glTranslatef(-8,0.0,8);
-    //nkey();
+    
     	if((posx>=-8-0.3&&posx<=-8+0.3)&&posy==0.0&&(posz>=8-0.3&&posz<=8+0.3)){
 		nflag[1]=1;
 		npoint++;}
@@ -591,7 +781,7 @@ void display()
  glPushMatrix();
  if(nflag[2]!=1){
     glTranslatef(8,0.0,-8);
-    //nkey();
+
     	if((posx>=8-0.3&&posx<=8+0.3)&&posy==0.0&&(posz>=-8-0.3&&posz<=-8+0.3)){
 		nflag[2]=1;
 		npoint++;}
@@ -647,12 +837,15 @@ int main(int argc, char** argv) {
     glutInitWindowSize(DIM*60,DIM*60); 
     glutInitWindowPosition(100,100);
     glutCreateWindow("Mundo 1");
+	 primer = obj_create("robot2.obj");
     initGL();
     loadTextures();
+	//obj_render(primer);
     glutDisplayFunc(display); 
     glutMouseFunc(ControlRaton);
     glutKeyboardFunc(teclado1);
 	glutSpecialFunc(teclado2);
+	
     glutMainLoop();
     return 0;
 }
